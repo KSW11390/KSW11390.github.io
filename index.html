@@ -562,6 +562,223 @@
       color: var(--text-primary);
     }
 
+    /* ── MUSIC PLAYER ── */
+    .music-player-card {
+      display: flex;
+      gap: 32px;
+      align-items: flex-start;
+      margin-bottom: 40px;
+    }
+
+    .player-photo-wrap {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      flex-shrink: 0;
+      cursor: pointer;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .player-photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      transition: transform 0.3s;
+    }
+
+    .player-photo-wrap:hover img {
+      transform: scale(1.04);
+    }
+
+    /* hover/play overlay */
+    .player-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(28, 10, 0, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .player-photo-wrap:hover .player-overlay,
+    .player-photo-wrap.playing .player-overlay {
+      opacity: 1;
+    }
+
+    .play-btn-circle {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.92);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.15s, background 0.15s;
+      pointer-events: none;
+    }
+
+    .player-photo-wrap:hover .play-btn-circle {
+      transform: scale(1.08);
+    }
+
+    .play-btn-circle svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--accent);
+    }
+
+    /* EQ bars — bottom of photo */
+    .eq-bars {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 44px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 4px;
+      padding: 0 12px 10px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+
+    .player-photo-wrap.playing .eq-bars {
+      opacity: 1;
+    }
+
+    .eq-bar {
+      width: 4px;
+      min-height: 4px;
+      background: rgba(255,255,255,0.9);
+      border-radius: 2px 2px 0 0;
+      animation: eq-bounce 0.5s ease-in-out infinite alternate;
+      animation-play-state: paused;
+    }
+
+    .player-photo-wrap.playing .eq-bar {
+      animation-play-state: running;
+    }
+
+    .eq-bar:nth-child(1)  { animation-duration: 0.45s; animation-delay: 0.00s; }
+    .eq-bar:nth-child(2)  { animation-duration: 0.62s; animation-delay: 0.08s; }
+    .eq-bar:nth-child(3)  { animation-duration: 0.38s; animation-delay: 0.14s; }
+    .eq-bar:nth-child(4)  { animation-duration: 0.70s; animation-delay: 0.05s; }
+    .eq-bar:nth-child(5)  { animation-duration: 0.42s; animation-delay: 0.20s; }
+    .eq-bar:nth-child(6)  { animation-duration: 0.55s; animation-delay: 0.10s; }
+    .eq-bar:nth-child(7)  { animation-duration: 0.66s; animation-delay: 0.03s; }
+    .eq-bar:nth-child(8)  { animation-duration: 0.50s; animation-delay: 0.17s; }
+    .eq-bar:nth-child(9)  { animation-duration: 0.40s; animation-delay: 0.25s; }
+    .eq-bar:nth-child(10) { animation-duration: 0.58s; animation-delay: 0.07s; }
+
+    @keyframes eq-bounce {
+      from { height: 4px;  opacity: 0.7; }
+      to   { height: 30px; opacity: 1;   }
+    }
+
+    /* glow border when playing */
+    .player-photo-wrap.playing {
+      box-shadow: 0 0 0 2px var(--accent), 0 0 16px 4px rgba(92,26,0,0.35);
+    }
+
+    /* track info */
+    .player-info {
+      flex: 1;
+      padding-top: 8px;
+    }
+
+    .player-info .track-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .player-info .track-meta {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .player-info .track-desc {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 14px;
+    }
+
+    .player-hint {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-top: 12px;
+    }
+
+    .track-list {
+      list-style: none;
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .track-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .track-row:hover {
+      background: #f5ebe3;
+    }
+
+    .track-row.active {
+      background: #f0e0d4;
+    }
+
+    .track-num {
+      font-size: 12px;
+      color: var(--text-muted);
+      width: 16px;
+      flex-shrink: 0;
+      text-align: center;
+    }
+
+    .track-row.active .track-num {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .track-name {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    .track-name em {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-style: normal;
+      display: block;
+    }
+
+    .track-row.active .track-name {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
     /* ── FOOTER ── */
     footer {
       max-width: var(--max-width);
@@ -760,6 +977,47 @@
         <em>sound</em>, not just what they <em>mean</em>.
       </p>
 
+      <!-- ── MUSIC PLAYER ── -->
+      <div class="music-player-card">
+        <div class="player-photo-wrap" id="playerWrap">
+          <img src="프사.JPG" alt="Track cover" />
+          <div class="player-overlay">
+            <div class="play-btn-circle">
+              <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+          <div class="eq-bars">
+            <span class="eq-bar"></span><span class="eq-bar"></span>
+            <span class="eq-bar"></span><span class="eq-bar"></span>
+            <span class="eq-bar"></span><span class="eq-bar"></span>
+            <span class="eq-bar"></span><span class="eq-bar"></span>
+            <span class="eq-bar"></span><span class="eq-bar"></span>
+          </div>
+        </div>
+
+        <div class="player-info">
+          <p class="track-title" id="nowTitle">Fifty Fifty - Gravity</p>
+          <p class="track-meta" id="nowMeta">Band Remix &middot; NIVV</p>
+          <ul class="track-list" id="trackList">
+            <li class="track-row active" data-idx="0">
+              <span class="track-num">1</span>
+              <span class="track-name">Fifty Fifty — Gravity <em>Band Remix</em></span>
+            </li>
+            <li class="track-row" data-idx="1">
+              <span class="track-num">2</span>
+              <span class="track-name">Lauv — I Like Me Better <em>NIVV Remix</em></span>
+            </li>
+            <li class="track-row" data-idx="2">
+              <span class="track-num">3</span>
+              <span class="track-name">NewJeans — Asap <em>J-pop Remix</em></span>
+            </li>
+          </ul>
+          <p class="player-hint">Click image to play &middot; Click track to switch</p>
+        </div>
+      </div>
+      <!-- hidden YouTube player -->
+      <div id="yt-player" style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;"></div>
+
       <p class="music-subtitle">Performances &amp; Exhibitions</p>
       <table class="music-table">
         <thead>
@@ -864,5 +1122,79 @@
     &copy; 2026 [Seungwoo Kang]. Built with care.
   </footer>
 
+  <script>
+    const tracks = [
+      { id: 'pB_24JFVyyI', title: 'Fifty Fifty — Gravity',       meta: 'Band Remix · NIVV' },
+      { id: 'WL0TJPOHD0w', title: 'Lauv — I Like Me Better',     meta: 'NIVV Remix'         },
+      { id: 'lazaSZuhGRk', title: 'NewJeans — Asap',              meta: 'J-pop Remix · NIVV' },
+    ];
+
+    const playPath  = 'M8 5v14l11-7z';
+    const pausePath = 'M6 19h4V5H6v14zm8-14v14h4V5h-4z';
+
+    const wrap      = document.getElementById('playerWrap');
+    const icon      = document.getElementById('playIcon');
+    const nowTitle  = document.getElementById('nowTitle');
+    const nowMeta   = document.getElementById('nowMeta');
+    const trackRows = document.querySelectorAll('.track-row');
+
+    let ytPlayer = null;
+    let currentIdx = 0;
+    let isPlaying = false;
+
+    function setPlaying(state) {
+      isPlaying = state;
+      wrap.classList.toggle('playing', state);
+      icon.querySelector('path').setAttribute('d', state ? pausePath : playPath);
+    }
+
+    function loadTrack(idx) {
+      currentIdx = idx;
+      const t = tracks[idx];
+      nowTitle.textContent = t.title;
+      nowMeta.textContent  = t.meta;
+      trackRows.forEach((r, i) => r.classList.toggle('active', i === idx));
+      if (ytPlayer) {
+        ytPlayer.loadVideoById(t.id);
+        setPlaying(true);
+      }
+    }
+
+    // YouTube IFrame API
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(tag);
+
+    window.onYouTubeIframeAPIReady = function () {
+      ytPlayer = new YT.Player('yt-player', {
+        height: '1', width: '1',
+        videoId: tracks[0].id,
+        playerVars: { autoplay: 0, controls: 0 },
+        events: {
+          onStateChange: (e) => {
+            if (e.data === YT.PlayerState.PLAYING) setPlaying(true);
+            if (e.data === YT.PlayerState.PAUSED)  setPlaying(false);
+            if (e.data === YT.PlayerState.ENDED) {
+              const next = (currentIdx + 1) % tracks.length;
+              loadTrack(next);
+            }
+          }
+        }
+      });
+    };
+
+    wrap.addEventListener('click', () => {
+      if (!ytPlayer) return;
+      isPlaying ? ytPlayer.pauseVideo() : ytPlayer.playVideo();
+    });
+
+    trackRows.forEach((row) => {
+      row.addEventListener('click', () => {
+        const idx = parseInt(row.dataset.idx);
+        if (idx === currentIdx && isPlaying) { ytPlayer.pauseVideo(); return; }
+        loadTrack(idx);
+      });
+    });
+  </script>
 </body>
 </html>
