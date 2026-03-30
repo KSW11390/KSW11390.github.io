@@ -779,6 +779,42 @@
       font-weight: 600;
     }
 
+    .track-ext-links {
+      display: flex;
+      gap: 8px;
+      margin: 10px 0 4px;
+    }
+
+    .ext-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 4px 10px;
+      border-radius: 3px;
+      transition: opacity 0.15s;
+    }
+
+    .ext-link:hover { opacity: 0.8; }
+
+    .ext-link svg {
+      width: 13px;
+      height: 13px;
+      fill: currentColor;
+    }
+
+    .ext-link.yt {
+      background: #ff0000;
+      color: #fff;
+    }
+
+    .ext-link.sc {
+      background: #ff5500;
+      color: #fff;
+    }
+
     /* ── FOOTER ── */
     footer {
       max-width: var(--max-width);
@@ -996,8 +1032,14 @@
         </div>
 
         <div class="player-info">
-          <p class="track-title" id="nowTitle">Fifty Fifty - Gravity</p>
-          <p class="track-meta" id="nowMeta">Band Remix &middot; NIVV</p>
+          <p class="track-title" id="nowTitle">Fifty Fifty — Gravity</p>
+          <p class="track-meta" id="nowMeta">Band Remix · NIVV</p>
+          <div class="track-ext-links" id="nowLinks">
+            <a href="https://www.youtube.com/watch?v=pB_24JFVyyI" target="_blank" rel="noopener" class="ext-link yt">
+              <svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+              YouTube
+            </a>
+          </div>
           <ul class="track-list" id="trackList">
             <li class="track-row active" data-idx="0">
               <span class="track-num">1</span>
@@ -1015,8 +1057,7 @@
           <p class="player-hint">Click image to play &middot; Click track to switch</p>
         </div>
       </div>
-      <!-- hidden YouTube player -->
-      <div id="yt-player" style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;"></div>
+      <audio id="audioPlayer" preload="none"></audio>
 
       <p class="music-subtitle">Performances &amp; Exhibitions</p>
       <table class="music-table">
@@ -1124,9 +1165,30 @@
 
   <script>
     const tracks = [
-      { id: 'pB_24JFVyyI', title: 'Fifty Fifty — Gravity',       meta: 'Band Remix · NIVV' },
-      { id: 'WL0TJPOHD0w', title: 'Lauv — I Like Me Better',     meta: 'NIVV Remix'         },
-      { id: 'lazaSZuhGRk', title: 'NewJeans — Asap',              meta: 'J-pop Remix · NIVV' },
+      {
+        mp3:   'track1.mp3',
+        title: 'Fifty Fifty — Gravity',
+        meta:  'Band Remix · NIVV',
+        links: [
+          { type: 'yt', url: 'https://www.youtube.com/watch?v=pB_24JFVyyI', label: 'YouTube' },
+        ]
+      },
+      {
+        mp3:   'track2.mp3',
+        title: 'Lauv — I Like Me Better',
+        meta:  'NIVV Remix',
+        links: [
+          { type: 'yt', url: 'https://www.youtube.com/watch?v=WL0TJPOHD0w', label: 'YouTube' },
+        ]
+      },
+      {
+        mp3:   'track3.mp3',
+        title: 'NewJeans — Asap',
+        meta:  'J-pop Remix · NIVV',
+        links: [
+          { type: 'yt', url: 'https://www.youtube.com/watch?v=lazaSZuhGRk', label: 'YouTube' },
+        ]
+      },
     ];
 
     const playPath  = 'M8 5v14l11-7z';
@@ -1134,67 +1196,62 @@
 
     const wrap      = document.getElementById('playerWrap');
     const icon      = document.getElementById('playIcon');
+    const audio     = document.getElementById('audioPlayer');
     const nowTitle  = document.getElementById('nowTitle');
     const nowMeta   = document.getElementById('nowMeta');
+    const nowLinks  = document.getElementById('nowLinks');
     const trackRows = document.querySelectorAll('.track-row');
 
-    let ytPlayer = null;
+    const ytIconSVG = `<svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>`;
+    const scIconSVG = `<svg viewBox="0 0 24 24"><path d="M1.175 12.225c-.108 0-.197.088-.207.197l-.018 1.02.018 1.005c.01.108.099.195.207.195.108 0 .198-.087.208-.195l.022-1.005-.022-1.02c-.01-.11-.1-.197-.208-.197zm-.957.606c-.1 0-.185.083-.192.183L0 13.442l.026.635c.007.1.092.183.192.183.1 0 .183-.083.19-.183L.43 13.442l-.022-.628c-.007-.1-.09-.183-.19-.183zm19.956-4.839c-.068 0-.131.006-.193.018C20.68 5.894 18.627 4 16.128 4c-.676 0-1.316.147-1.887.408-.218.096-.277.195-.28.288v8.827c.003.099.072.182.17.196l5.953.003c.96 0 1.738-.777 1.738-1.737 0-.96-.778-1.737-1.738-1.737zM3.51 10.395c-.144 0-.26.117-.27.26l-.027 2.788.027 1.352c.01.144.126.26.27.26.143 0 .26-.116.27-.26l.03-1.352-.03-2.788c-.01-.143-.127-.26-.27-.26z"/></svg>`;
+
     let currentIdx = 0;
-    let isPlaying = false;
 
     function setPlaying(state) {
-      isPlaying = state;
       wrap.classList.toggle('playing', state);
       icon.querySelector('path').setAttribute('d', state ? pausePath : playPath);
     }
 
-    function loadTrack(idx) {
+    function renderLinks(links) {
+      nowLinks.innerHTML = links.map(l => {
+        const ico = l.type === 'yt' ? ytIconSVG : scIconSVG;
+        return `<a href="${l.url}" target="_blank" rel="noopener" class="ext-link ${l.type}">${ico}${l.label}</a>`;
+      }).join('');
+    }
+
+    function loadTrack(idx, autoplay = true) {
       currentIdx = idx;
       const t = tracks[idx];
       nowTitle.textContent = t.title;
       nowMeta.textContent  = t.meta;
+      renderLinks(t.links);
       trackRows.forEach((r, i) => r.classList.toggle('active', i === idx));
-      if (ytPlayer) {
-        ytPlayer.loadVideoById(t.id);
-        setPlaying(true);
-      }
+      audio.src = t.mp3;
+      if (autoplay) audio.play().catch(() => {});
     }
 
-    // YouTube IFrame API
-    const tag = document.createElement('script');
-    tag.src = 'https://www.youtube.com/iframe_api';
-    document.head.appendChild(tag);
-
-    window.onYouTubeIframeAPIReady = function () {
-      ytPlayer = new YT.Player('yt-player', {
-        height: '1', width: '1',
-        videoId: tracks[0].id,
-        playerVars: { autoplay: 0, controls: 0 },
-        events: {
-          onStateChange: (e) => {
-            if (e.data === YT.PlayerState.PLAYING) setPlaying(true);
-            if (e.data === YT.PlayerState.PAUSED)  setPlaying(false);
-            if (e.data === YT.PlayerState.ENDED) {
-              const next = (currentIdx + 1) % tracks.length;
-              loadTrack(next);
-            }
-          }
-        }
-      });
-    };
-
     wrap.addEventListener('click', () => {
-      if (!ytPlayer) return;
-      isPlaying ? ytPlayer.pauseVideo() : ytPlayer.playVideo();
+      if (!audio.src || audio.src.endsWith('audioPlayer')) { loadTrack(currentIdx); return; }
+      audio.paused ? audio.play().catch(() => {}) : audio.pause();
     });
 
-    trackRows.forEach((row) => {
+    audio.addEventListener('play',  () => setPlaying(true));
+    audio.addEventListener('pause', () => setPlaying(false));
+    audio.addEventListener('ended', () => {
+      const next = (currentIdx + 1) % tracks.length;
+      loadTrack(next);
+    });
+
+    trackRows.forEach(row => {
       row.addEventListener('click', () => {
         const idx = parseInt(row.dataset.idx);
-        if (idx === currentIdx && isPlaying) { ytPlayer.pauseVideo(); return; }
+        if (idx === currentIdx) { wrap.click(); return; }
         loadTrack(idx);
       });
     });
+
+    // init display
+    renderLinks(tracks[0].links);
   </script>
 </body>
 </html>
