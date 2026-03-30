@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>[Seungwoo Kang] — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --text-primary:   #1c0a00;
+      --text-secondary: #2a1000;
+      --text-muted:     #6b3a1f;
+      --border:         #c8a882;
+      --bg:             #ffffff;
+      --accent:         #5c1a00;
+      --link:           #7a2800;
+      --max-width:      760px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--text-secondary);
+      background: var(--bg);
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+    }
+
+    nav .nav-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 52px;
+    }
+
+    nav .nav-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 28px;
+    }
+
+    nav ul a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-muted);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    nav ul a:hover {
+      color: var(--text-primary);
+    }
+
+    /* ── LAYOUT ── */
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    section {
+      padding: 64px 0 0;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      padding-top: 72px;
+      padding-bottom: 8px;
+      display: flex;
+      align-items: flex-start;
+      gap: 48px;
+    }
+
+    #hero .hero-left {
+      flex: 1;
+    }
+
+    #hero .hero-right {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    #hero .hero-photo {
+      width: 190px;
+      height: 260px;
+      border-radius: 4px;
+      object-fit: cover;
+      object-position: center top;
+      border: 2px solid var(--border);
+    }
+
+    #hero h1 {
+      font-size: 30px;
+      font-weight: 900;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    #hero .hero-about {
+      font-size: 14.5px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+    }
+
+    #hero .hero-interests-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+    }
+
+    #hero .hero-interests {
+      list-style: none;
+      margin-bottom: 24px;
+    }
+
+    #hero .hero-interests li {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      padding: 4px 0;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    #hero .hero-interests li::before {
+      content: "▪";
+      color: var(--accent);
+      font-size: 10px;
+      flex-shrink: 0;
+    }
+
+    #hero .hero-cv {
+      font-size: 13.5px;
+      font-style: italic;
+      color: var(--text-muted);
+    }
+
+    #hero .hero-cv a {
+      color: var(--link);
+      text-decoration: underline;
+    }
+
+    .link-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .link-row a {
+      font-size: 13px;
+      color: var(--link);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 5px 14px;
+      border-radius: 2px;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .link-row a:hover {
+      background: #f5ebe3;
+      border-color: #7a2800;
+    }
+
+    .link-row a.primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    .link-row a.primary:hover {
+      background: #3d0f00;
+    }
+
+    /* ── ICON LINKS ── */
+    .icon-links {
+      display: flex;
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .icon-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      transition: background 0.15s, transform 0.15s;
+    }
+
+    .icon-links a:hover {
+      background: #3d0f00;
+      transform: translateY(-2px);
+    }
+
+    .icon-links a svg {
+      width: 20px;
+      height: 20px;
+      fill: #fff;
+    }
+
+    /* ── SECTION HEADER ── */
+    .section-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── ABOUT ── */
+    #about p {
+      margin-bottom: 14px;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    #about p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ── RESEARCH INTERESTS ── */
+    .interest-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px 32px;
+    }
+
+    .interest-item h3 {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 5px;
+    }
+
+    .interest-item p {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ── PUBLICATIONS ── */
+    .pub-list {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .pub-item {
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pub-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .pub-item h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+      line-height: 1.45;
+    }
+
+    .pub-item .authors {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      margin-bottom: 3px;
+    }
+
+    .pub-item .authors strong {
+      color: var(--text-secondary);
+      font-weight: 700;
+    }
+
+    .pub-item .venue {
+      font-size: 13px;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .pub-item .abstract {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+
+    .pub-note {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-bottom: 24px;
+    }
+
+    /* ── PROJECTS ── */
+    .project-list {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .project-item {
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .project-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .project-item h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 3px;
+    }
+
+    .project-item .meta-line {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-bottom: 8px;
+    }
+
+    .project-item p {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin-bottom: 8px;
+    }
+
+    .stack {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .stack span {
+      background: #f5ebe3;
+      border: 1px solid var(--border);
+      padding: 2px 8px;
+      border-radius: 2px;
+      margin-right: 5px;
+      display: inline-block;
+      margin-bottom: 4px;
+    }
+
+    /* ── MUSIC ── */
+    .music-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      margin-top: 4px;
+      margin-bottom: 32px;
+    }
+
+    .music-table thead tr {
+      border-bottom: 2px solid var(--border);
+    }
+
+    .music-table th {
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 0 12px 10px 0;
+    }
+
+    .music-table td {
+      padding: 10px 12px 10px 0;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .music-table td:first-child {
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .works-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .works-list li {
+      font-size: 13.5px;
+      line-height: 1.6;
+    }
+
+    .works-list li strong {
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .music-subtitle {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin: 0 0 14px;
+    }
+
+    #music p.intro {
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+
+    /* ── CV ── */
+    .cv-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .cv-table tr {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cv-table tr:last-child {
+      border-bottom: none;
+    }
+
+    .cv-table td {
+      padding: 14px 0;
+      vertical-align: top;
+    }
+
+    .cv-table td:first-child {
+      width: 160px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding-right: 24px;
+      padding-top: 17px;
+    }
+
+    .cv-table td:last-child {
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .cv-download {
+      margin-top: 28px;
+    }
+
+    /* ── CONTACT ── */
+    .contact-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .contact-list li {
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-secondary);
+    }
+
+    .contact-list .label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      width: 100px;
+      flex-shrink: 0;
+    }
+
+    .contact-list a {
+      color: var(--link);
+      text-decoration: none;
+    }
+
+    .contact-list a:hover {
+      text-decoration: underline;
+    }
+
+    /* ── SHARED LINK CHIPS ── */
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .chip-row a {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 3px 10px;
+      border-radius: 2px;
+      transition: background 0.15s;
+    }
+
+    .chip-row a:hover {
+      background: #f5ebe3;
+      color: var(--text-primary);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      max-width: var(--max-width);
+      margin: 48px auto 0;
+      padding: 24px 24px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      #hero {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      #hero .hero-photo {
+        width: 100px;
+        height: 140px;
+      }
+
+      #hero .link-row {
+        justify-content: center;
+      }
+
+      #hero .tagline {
+        border-left: none;
+        border-top: 3px solid var(--border);
+        padding-left: 0;
+        padding-top: 12px;
+      }
+
+      nav ul {
+        gap: 16px;
+      }
+
+      nav ul a {
+        font-size: 11px;
+      }
+
+      #hero h1 {
+        font-size: 26px;
+      }
+
+      .interest-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .cv-table td:first-child {
+        width: 120px;
+        font-size: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAVIGATION ── -->
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-name" href="#hero">Seungwoo Kang</a>
+      <ul>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#music">Music</a></li>
+        <li><a href="#cv">CV</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ── HERO ── -->
+    <section id="hero">
+      <div class="hero-left">
+        <h1>Hi, I'm Seungwoo Kang.</h1>
+        <p class="hero-about">
+          I am a final-year undergraduate student at <strong>Hongik University</strong>, studying <strong>Computer Engineering</strong>.
+          I am currently a research intern at <a href="https://sites.google.com/view/scai-lab/" target="_blank" rel="noopener"><strong>SCAI Lab</strong></a>, Chung-Ang University.
+          My research focuses on speech processing and large language models — I am particularly interested in
+          how machines can understand and generate human speech in ways that feel natural and contextually aware.
+          Outside the lab, I have been playing <strong>guitar</strong> and composing for over 6 years.
+        </p>
+        <p class="hero-interests-label">My research interests include:</p>
+        <ul class="hero-interests">
+          <li>Speech Processing</li>
+          <li>Knowledge Distillation</li>
+          <li>Mechanistic Interpretability</li>
+        </ul>
+        <p class="hero-cv">See my CV <a href="#">here</a>.</p>
+      </div>
+
+      <div class="hero-right">
+        <img class="hero-photo" src="프사.JPG" alt="Seungwoo Kang" />
+        <div class="icon-links">
+          <!-- GitHub -->
+          <a href="https://github.com/KSW11390" title="GitHub" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577v-2.165c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+          </a>
+          <!-- LinkedIn -->
+          <a href="https://www.linkedin.com/in/seungwoo-kang-295723382/" title="LinkedIn" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+          <!-- YouTube -->
+          <a href="https://www.youtube.com/@nivv1234" title="YouTube" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/>
+            </svg>
+          </a>
+          <!-- Google Scholar -->
+          <a href="#" title="Google Scholar">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 10a8 8 0 0 1 7.162 3.44L24 9.5z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── PUBLICATIONS ── -->
+    <section id="publications">
+      <p class="section-title">Publications</p>
+      <p class="pub-note">† Preprints and works in submission.</p>
+      <div class="pub-list">
+
+        <div class="pub-item">
+          <h3>[논문 제목] †</h3>
+          <p class="authors"><strong>[본인 이름]</strong>, [공저자 1], [공저자 2]</p>
+          <p class="venue">[학회/저널명] &middot; [연도]</p>
+          <p class="abstract">
+            [한 줄 요약 — 예: We propose a lightweight fine-tuning method for speech LLMs
+            that reduces hallucination in spoken question-answering tasks.]
+          </p>
+          <div class="chip-row">
+            <a href="#">PDF</a>
+            <a href="#">arXiv</a>
+            <a href="#">Slides</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── PROJECTS ── -->
+    <section id="projects">
+      <p class="section-title">Projects</p>
+      <div class="project-list">
+
+        <div class="project-item">
+          <h3>[프로젝트 제목]</h3>
+          <p class="meta-line">[수업명 or Personal Project] &middot; [기간]</p>
+          <p>
+            [설명 — 예: Built an end-to-end Korean speech recognition system fine-tuned on
+            spontaneous speech corpora. Achieved X% WER on the test set, outperforming the baseline by Y%.]
+          </p>
+          <div class="stack">
+            <span>Python</span><span>PyTorch</span><span>HuggingFace</span><span>Whisper</span>
+          </div>
+          <div class="chip-row">
+            <a href="#">GitHub</a>
+            <a href="#">Report</a>
+            <a href="#">Demo</a>
+          </div>
+        </div>
+
+        <div class="project-item">
+          <h3>[프로젝트 제목 2]</h3>
+          <p class="meta-line">[수업명 or Personal Project] &middot; [기간]</p>
+          <p>[설명]</p>
+          <div class="stack">
+            <span>[기술 스택]</span>
+          </div>
+          <div class="chip-row">
+            <a href="#">GitHub</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── MUSIC ── -->
+    <section id="music">
+      <p class="section-title">Music</p>
+      <p class="intro">
+        I have been performing and composing for 6 years. My musical background informs the way
+        I approach research — listening carefully, thinking about structure, and caring about how things
+        <em>sound</em>, not just what they <em>mean</em>.
+      </p>
+
+      <p class="music-subtitle">Performances &amp; Exhibitions</p>
+      <table class="music-table">
+        <thead>
+          <tr>
+            <th>Year</th>
+            <th>Event</th>
+            <th>Venue</th>
+            <th>Program</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2025</td>
+            <td>[공연명]</td>
+            <td>[장소]</td>
+            <td>[레퍼토리]</td>
+          </tr>
+          <tr>
+            <td>2024</td>
+            <td>[공연명]</td>
+            <td>[장소]</td>
+            <td>[레퍼토리]</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="music-subtitle" style="margin-top: 8px;">Selected Works</p>
+      <ul class="works-list">
+        <li>
+          <strong>[곡/작품 제목]</strong> — [설명, 예: Solo piano piece exploring irregular meter and silence]
+          <div class="chip-row" style="margin-top:6px;">
+            <a href="#">Listen</a>
+            <a href="#">Score</a>
+          </div>
+        </li>
+        <li>
+          <strong>[곡/작품 제목 2]</strong> — [설명]
+          <div class="chip-row" style="margin-top:6px;">
+            <a href="#">Watch</a>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ── CV ── -->
+    <section id="cv">
+      <p class="section-title">CV</p>
+      <table class="cv-table">
+        <tr>
+          <td>Education</td>
+          <td>B.S. [Computer Engineering], [Hongik University], 2020–</td>
+        </tr>
+        <tr>
+          <td>Research</td>
+          <td>[SCAI LAB], advised by Prof. [Ji Won Yoon], [기간]</td>
+        </tr>
+        <tr>
+          <td>Internship</td>
+          <td>[회사/기관], [기간]</td>
+        </tr>
+        <tr>
+          <td>Awards</td>
+          <td>[수상내역]</td>
+        </tr>
+        <tr>
+          <td>Skills</td>
+          <td>Python &middot; PyTorch &middot; HuggingFace &middot; [기타]</td>
+        </tr>
+      </table>
+      <div class="cv-download">
+        <div class="link-row">
+          <a href="#" class="primary">Download Full CV (PDF)</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CONTACT ── -->
+    <section id="contact">
+      <p class="section-title">Contact</p>
+      <p style="font-size:14px; color: var(--text-muted); margin-bottom: 24px;">
+        I am always happy to talk about research, music, or collaboration.
+      </p>
+      <ul class="contact-list">
+        <li>
+          <span class="label">Email</span>
+          <a href="mailto:[이메일 주소]">[이메일 주소]</a>
+        </li>
+        <li>
+          <span class="label">GitHub</span>
+          <a href="#">github.com/[username]</a>
+        </li>
+        <li>
+          <span class="label">Google Scholar</span>
+          <a href="#">Scholar Profile</a>
+        </li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer>
+    &copy; 2026 [Seungwoo Kang]. Built with care.
+  </footer>
+
+</body>
+</html>
