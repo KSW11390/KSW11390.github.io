@@ -562,7 +562,135 @@
       color: var(--text-primary);
     }
 
-    /* ── MUSIC PLAYER ── */
+    /* ── AUDIO PLAYER ── */
+    .audio-player {
+      max-width: 460px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 40px;
+    }
+
+    .player-cover {
+      background: linear-gradient(135deg, #1c0a00 0%, #5c1a00 60%, #8b3a10 100%);
+      height: 90px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 5px;
+      padding-bottom: 14px;
+    }
+
+    .player-cover .eq-bar {
+      width: 4px;
+      min-height: 4px;
+      background: rgba(255,255,255,0.55);
+      border-radius: 2px 2px 0 0;
+      animation: eq-bounce 0.5s ease-in-out infinite alternate;
+      animation-play-state: paused;
+    }
+
+    .audio-player.playing .player-cover .eq-bar {
+      background: rgba(255,255,255,0.9);
+      animation-play-state: running;
+    }
+
+    .player-body {
+      padding: 18px 20px 16px;
+    }
+
+    .player-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+
+    .player-artist {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .player-seek {
+      width: 100%;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--border);
+      outline: none;
+      cursor: pointer;
+      margin-bottom: 6px;
+    }
+
+    .player-seek::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      cursor: pointer;
+    }
+
+    .player-seek::-moz-range-thumb {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: none;
+      cursor: pointer;
+    }
+
+    .player-time-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .player-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .player-play-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s, transform 0.1s;
+    }
+
+    .player-play-btn:hover {
+      background: #3d0f00;
+      transform: scale(1.06);
+    }
+
+    .player-play-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: #fff;
+    }
+
+    .player-links {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── OLD PHOTO PLAYER (keep for eq keyframes only) ── */
     .music-player-card {
       display: flex;
       gap: 32px;
@@ -815,6 +943,11 @@
       color: #fff;
     }
 
+    .ext-link.sp {
+      background: #1db954;
+      color: #fff;
+    }
+
     /* ── FOOTER ── */
     footer {
       max-width: var(--max-width);
@@ -1013,51 +1146,52 @@
         <em>sound</em>, not just what they <em>mean</em>.
       </p>
 
-      <!-- ── MUSIC PLAYER ── -->
-      <div class="music-player-card">
-        <div class="player-photo-wrap" id="playerWrap">
-          <img src="프사.JPG" alt="Track cover" />
-          <div class="player-overlay">
-            <div class="play-btn-circle">
-              <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-          </div>
-          <div class="eq-bars">
-            <span class="eq-bar"></span><span class="eq-bar"></span>
-            <span class="eq-bar"></span><span class="eq-bar"></span>
-            <span class="eq-bar"></span><span class="eq-bar"></span>
-            <span class="eq-bar"></span><span class="eq-bar"></span>
-            <span class="eq-bar"></span><span class="eq-bar"></span>
-          </div>
+      <!-- ── AUDIO PLAYER ── -->
+      <div class="audio-player" id="audioPlayer">
+        <div class="player-cover">
+          <span class="eq-bar" style="animation-duration:.45s;animation-delay:.00s"></span>
+          <span class="eq-bar" style="animation-duration:.62s;animation-delay:.08s"></span>
+          <span class="eq-bar" style="animation-duration:.38s;animation-delay:.14s"></span>
+          <span class="eq-bar" style="animation-duration:.70s;animation-delay:.05s"></span>
+          <span class="eq-bar" style="animation-duration:.42s;animation-delay:.20s"></span>
+          <span class="eq-bar" style="animation-duration:.55s;animation-delay:.10s"></span>
+          <span class="eq-bar" style="animation-duration:.66s;animation-delay:.03s"></span>
+          <span class="eq-bar" style="animation-duration:.50s;animation-delay:.17s"></span>
+          <span class="eq-bar" style="animation-duration:.40s;animation-delay:.25s"></span>
+          <span class="eq-bar" style="animation-duration:.58s;animation-delay:.07s"></span>
+          <span class="eq-bar" style="animation-duration:.44s;animation-delay:.12s"></span>
+          <span class="eq-bar" style="animation-duration:.60s;animation-delay:.18s"></span>
         </div>
-
-        <div class="player-info">
-          <p class="track-title" id="nowTitle">Fifty Fifty — Gravity</p>
-          <p class="track-meta" id="nowMeta">Band Remix · NIVV</p>
-          <div class="track-ext-links" id="nowLinks">
+        <div class="player-body">
+          <p class="player-title">What If</p>
+          <p class="player-artist">Seungwoo Kang</p>
+          <input type="range" class="player-seek" id="seekBar" value="0" min="0" step="0.01" />
+          <div class="player-time-row">
+            <span id="timeCurrent">0:00</span>
+            <span id="timeDuration">0:00</span>
+          </div>
+          <div class="player-controls">
+            <button class="player-play-btn" id="playBtn" aria-label="Play">
+              <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+          </div>
+          <div class="player-links">
             <a href="https://www.youtube.com/watch?v=pB_24JFVyyI" target="_blank" rel="noopener" class="ext-link yt">
               <svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
               YouTube
             </a>
+            <a href="https://soundcloud.com/vu6apgkenst2" target="_blank" rel="noopener" class="ext-link sc">
+              <svg viewBox="0 0 24 24"><path d="M1.175 12.225c-.108 0-.197.088-.207.197l-.018 1.02.018 1.005c.01.108.099.195.207.195.108 0 .198-.087.208-.195l.022-1.005-.022-1.02c-.01-.11-.1-.197-.208-.197zm-.957.606c-.1 0-.185.083-.192.183L0 13.442l.026.635c.007.1.092.183.192.183.1 0 .183-.083.19-.183L.43 13.442l-.022-.628c-.007-.1-.09-.183-.19-.183zm19.956-4.839c-.068 0-.131.006-.193.018C20.68 5.894 18.627 4 16.128 4c-.676 0-1.316.147-1.887.408-.218.096-.277.195-.28.288v8.827c.003.099.072.182.17.196l5.953.003c.96 0 1.738-.777 1.738-1.737 0-.96-.778-1.737-1.738-1.737zM3.51 10.395c-.144 0-.26.117-.27.26l-.027 2.788.027 1.352c.01.144.126.26.27.26.143 0 .26-.116.27-.26l.03-1.352-.03-2.788c-.01-.143-.127-.26-.27-.26zm17.285 3.445H6.17c-.149 0-.27.121-.27.27V17.4c0 .149.121.27.27.27h14.625c.892 0 1.615-.723 1.615-1.615 0-.892-.723-1.615-1.615-1.615zM4.898 9.59c-.182 0-.33.148-.34.33L4.53 13.44l.028 1.99c.01.182.158.33.34.33.181 0 .329-.148.339-.33l.032-1.99-.032-3.52c-.01-.182-.158-.33-.34-.33zm-1.388.806c-.162 0-.295.133-.303.295l-.025 3.75.025 1.767c.008.162.141.295.303.295.162 0 .294-.133.303-.295l.028-1.767-.028-3.75c-.009-.162-.141-.295-.303-.295z"/></svg>
+              SoundCloud
+            </a>
+            <a href="https://open.spotify.com/artist/6pETSz11KPQS3ArO4dmqRT" target="_blank" rel="noopener" class="ext-link sp">
+              <svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+              Spotify
+            </a>
           </div>
-          <ul class="track-list" id="trackList">
-            <li class="track-row active" data-idx="0">
-              <span class="track-num">1</span>
-              <span class="track-name">Fifty Fifty — Gravity <em>Band Remix</em></span>
-            </li>
-            <li class="track-row" data-idx="1">
-              <span class="track-num">2</span>
-              <span class="track-name">Lauv — I Like Me Better <em>NIVV Remix</em></span>
-            </li>
-            <li class="track-row" data-idx="2">
-              <span class="track-num">3</span>
-              <span class="track-name">NewJeans — Asap <em>J-pop Remix</em></span>
-            </li>
-          </ul>
-          <p class="player-hint">Click image to play &middot; Click track to switch</p>
         </div>
       </div>
-      <audio id="audioPlayer" preload="none"></audio>
+      <audio id="audioEl" src="What%20if.mp3" preload="metadata"></audio>
 
       <p class="music-subtitle">Performances &amp; Exhibitions</p>
       <table class="music-table">
@@ -1164,94 +1298,55 @@
   </footer>
 
   <script>
-    const tracks = [
-      {
-        mp3:   'track1.mp3',
-        title: 'Fifty Fifty — Gravity',
-        meta:  'Band Remix · NIVV',
-        links: [
-          { type: 'yt', url: 'https://www.youtube.com/watch?v=pB_24JFVyyI', label: 'YouTube' },
-        ]
-      },
-      {
-        mp3:   'track2.mp3',
-        title: 'Lauv — I Like Me Better',
-        meta:  'NIVV Remix',
-        links: [
-          { type: 'yt', url: 'https://www.youtube.com/watch?v=WL0TJPOHD0w', label: 'YouTube' },
-        ]
-      },
-      {
-        mp3:   'track3.mp3',
-        title: 'NewJeans — Asap',
-        meta:  'J-pop Remix · NIVV',
-        links: [
-          { type: 'yt', url: 'https://www.youtube.com/watch?v=lazaSZuhGRk', label: 'YouTube' },
-        ]
-      },
-    ];
+const playerCard = document.getElementById('audioPlayer');
+    const audio      = document.getElementById('audioEl');
+    const playBtn    = document.getElementById('playBtn');
+    const playIcon   = document.getElementById('playIcon');
+    const seekBar    = document.getElementById('seekBar');
+    const timeCur    = document.getElementById('timeCurrent');
+    const timeDur    = document.getElementById('timeDuration');
 
     const playPath  = 'M8 5v14l11-7z';
     const pausePath = 'M6 19h4V5H6v14zm8-14v14h4V5h-4z';
 
-    const wrap      = document.getElementById('playerWrap');
-    const icon      = document.getElementById('playIcon');
-    const audio     = document.getElementById('audioPlayer');
-    const nowTitle  = document.getElementById('nowTitle');
-    const nowMeta   = document.getElementById('nowMeta');
-    const nowLinks  = document.getElementById('nowLinks');
-    const trackRows = document.querySelectorAll('.track-row');
-
-    const ytIconSVG = `<svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>`;
-    const scIconSVG = `<svg viewBox="0 0 24 24"><path d="M1.175 12.225c-.108 0-.197.088-.207.197l-.018 1.02.018 1.005c.01.108.099.195.207.195.108 0 .198-.087.208-.195l.022-1.005-.022-1.02c-.01-.11-.1-.197-.208-.197zm-.957.606c-.1 0-.185.083-.192.183L0 13.442l.026.635c.007.1.092.183.192.183.1 0 .183-.083.19-.183L.43 13.442l-.022-.628c-.007-.1-.09-.183-.19-.183zm19.956-4.839c-.068 0-.131.006-.193.018C20.68 5.894 18.627 4 16.128 4c-.676 0-1.316.147-1.887.408-.218.096-.277.195-.28.288v8.827c.003.099.072.182.17.196l5.953.003c.96 0 1.738-.777 1.738-1.737 0-.96-.778-1.737-1.738-1.737zM3.51 10.395c-.144 0-.26.117-.27.26l-.027 2.788.027 1.352c.01.144.126.26.27.26.143 0 .26-.116.27-.26l.03-1.352-.03-2.788c-.01-.143-.127-.26-.27-.26z"/></svg>`;
-
-    let currentIdx = 0;
+    function fmt(s) {
+      const m = Math.floor(s / 60);
+      const sec = Math.floor(s % 60).toString().padStart(2, '0');
+      return `${m}:${sec}`;
+    }
 
     function setPlaying(state) {
-      wrap.classList.toggle('playing', state);
-      icon.querySelector('path').setAttribute('d', state ? pausePath : playPath);
+      playerCard.classList.toggle('playing', state);
+      playIcon.querySelector('path').setAttribute('d', state ? pausePath : playPath);
     }
 
-    function renderLinks(links) {
-      nowLinks.innerHTML = links.map(l => {
-        const ico = l.type === 'yt' ? ytIconSVG : scIconSVG;
-        return `<a href="${l.url}" target="_blank" rel="noopener" class="ext-link ${l.type}">${ico}${l.label}</a>`;
-      }).join('');
-    }
-
-    function loadTrack(idx, autoplay = true) {
-      currentIdx = idx;
-      const t = tracks[idx];
-      nowTitle.textContent = t.title;
-      nowMeta.textContent  = t.meta;
-      renderLinks(t.links);
-      trackRows.forEach((r, i) => r.classList.toggle('active', i === idx));
-      audio.src = t.mp3;
-      if (autoplay) audio.play().catch(() => {});
-    }
-
-    wrap.addEventListener('click', () => {
-      if (!audio.src || audio.src.endsWith('audioPlayer')) { loadTrack(currentIdx); return; }
+    playBtn.addEventListener('click', () => {
       audio.paused ? audio.play().catch(() => {}) : audio.pause();
     });
 
     audio.addEventListener('play',  () => setPlaying(true));
     audio.addEventListener('pause', () => setPlaying(false));
     audio.addEventListener('ended', () => {
-      const next = (currentIdx + 1) % tracks.length;
-      loadTrack(next);
+      setPlaying(false);
+      seekBar.value = 0;
+      timeCur.textContent = '0:00';
+      seekBar.style.background = '';
     });
 
-    trackRows.forEach(row => {
-      row.addEventListener('click', () => {
-        const idx = parseInt(row.dataset.idx);
-        if (idx === currentIdx) { wrap.click(); return; }
-        loadTrack(idx);
-      });
+    audio.addEventListener('loadedmetadata', () => {
+      seekBar.max = audio.duration;
+      timeDur.textContent = fmt(audio.duration);
     });
 
-    // init display
-    renderLinks(tracks[0].links);
+    audio.addEventListener('timeupdate', () => {
+      if (!isNaN(audio.duration)) {
+        seekBar.value = audio.currentTime;
+        timeCur.textContent = fmt(audio.currentTime);
+        seekBar.style.background = `linear-gradient(to right, var(--accent) ${(audio.currentTime/audio.duration)*100}%, var(--border) 0%)`;
+      }
+    });
+
+    seekBar.addEventListener('input', () => { audio.currentTime = seekBar.value; });
   </script>
 </body>
 </html>
