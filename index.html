@@ -948,6 +948,188 @@
       color: #fff;
     }
 
+    /* ── MUSIC CARD PLAYER ── */
+    .mc-desc { font-size: 14.5px; line-height: 1.8; color: var(--text-secondary); margin-bottom: 8px; }
+    .mc-note { font-size: 12.5px; font-style: italic; color: var(--text-muted); margin-bottom: 28px; }
+
+    .mc-wrap {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 32px;
+    }
+
+    .mc-player {
+      display: flex;
+      gap: 28px;
+      padding: 24px;
+      align-items: center;
+    }
+
+    .mc-art {
+      flex-shrink: 0;
+      width: 160px;
+      height: 160px;
+      background: #f0e4d8;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mc-art svg { width: 52px; height: 52px; fill: #c0957a; }
+
+    .mc-info { flex: 1; min-width: 0; }
+
+    .mc-title { font-size: 20px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .mc-tag   { font-size: 13px; font-weight: 700; color: var(--accent); margin-bottom: 20px; }
+
+    .mc-seek-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .mc-time {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-variant-numeric: tabular-nums;
+      min-width: 34px;
+    }
+
+    .mc-time.right { text-align: right; }
+
+    .mc-seek {
+      flex: 1;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--border);
+      outline: none;
+      cursor: pointer;
+    }
+
+    .mc-seek::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--text-primary);
+      cursor: pointer;
+    }
+
+    .mc-seek::-moz-range-thumb {
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--text-primary);
+      border: none; cursor: pointer;
+    }
+
+    .mc-controls {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .mc-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      transition: color 0.15s;
+    }
+
+    .mc-btn:hover { color: var(--text-primary); }
+    .mc-btn.active { color: var(--accent); }
+    .mc-btn svg { width: 18px; height: 18px; fill: currentColor; }
+
+    .mc-play-btn {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: var(--text-primary);
+      border: none;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s, transform 0.1s;
+      flex-shrink: 0;
+    }
+
+    .mc-play-btn:hover { background: var(--accent); transform: scale(1.06); }
+    .mc-play-btn svg { fill: #fff; width: 20px; height: 20px; }
+
+    .mc-vol {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: auto;
+    }
+
+    .mc-vol-btn { color: var(--text-muted); background: none; border: none; cursor: pointer; display:flex; align-items:center; }
+    .mc-vol-btn svg { width: 16px; height: 16px; fill: currentColor; }
+
+    .mc-vol-slider {
+      width: 72px;
+      -webkit-appearance: none; appearance: none;
+      height: 3px; border-radius: 2px;
+      background: var(--border); outline: none; cursor: pointer;
+    }
+
+    .mc-vol-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 10px; height: 10px;
+      border-radius: 50%; background: var(--text-primary); cursor: pointer;
+    }
+
+    /* tracklist */
+    .mc-tracklist {
+      border-top: 1px solid var(--border);
+      padding: 16px 24px 20px;
+    }
+
+    .mc-tl-label {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 12px;
+    }
+
+    .mc-track-item {
+      display: flex; align-items: center;
+      gap: 16px; padding: 11px 8px;
+      border-radius: 4px; cursor: pointer;
+      transition: background 0.15s;
+      border-bottom: 1px solid #f0e8e0;
+    }
+
+    .mc-track-item:last-child { border-bottom: none; }
+    .mc-track-item:hover { background: #faf3ee; }
+    .mc-track-item.active { background: #f5e8de; }
+
+    .mc-ti-num {
+      font-size: 13px; color: var(--text-muted);
+      width: 22px; text-align: right; flex-shrink: 0;
+    }
+
+    .mc-track-item.active .mc-ti-num { color: var(--accent); font-weight: 700; }
+
+    .mc-ti-info { flex: 1; min-width: 0; }
+    .mc-ti-name { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+    .mc-ti-sub  { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
+    .mc-track-item.active .mc-ti-name { color: var(--accent); }
+
+    .mc-ti-dur { font-size: 12.5px; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+
+    /* platform links */
+    .mc-platform {
+      display: flex; align-items: center; gap: 10px;
+      margin-top: 24px; flex-wrap: wrap;
+    }
+
+    .mc-platform-label { font-size: 12px; color: var(--text-muted); }
+
     /* ── FOOTER ── */
     footer {
       max-width: var(--max-width);
@@ -1140,101 +1322,101 @@
     <!-- ── MUSIC ── -->
     <section id="music">
       <p class="section-title">Music</p>
-      <p class="intro">
-        I have been performing and composing for 6 years. My musical background informs the way
-        I approach research — listening carefully, thinking about structure, and caring about how things
-        <em>sound</em>, not just what they <em>mean</em>.
+      <h2 style="font-size:22px;font-weight:900;color:var(--text-primary);margin-bottom:14px;">Music &amp; Compositions</h2>
+      <p class="mc-desc">
+        Outside of the lab, I spend much of my time playing guitar and experimenting with sound.
+        This is a collection of my original compositions and productions.
       </p>
+      <p class="mc-note">* All tracks are self-produced.</p>
 
-      <!-- ── AUDIO PLAYER ── -->
-      <div class="audio-player" id="audioPlayer">
-        <div class="player-cover">
-          <span class="eq-bar" style="animation-duration:.45s;animation-delay:.00s"></span>
-          <span class="eq-bar" style="animation-duration:.62s;animation-delay:.08s"></span>
-          <span class="eq-bar" style="animation-duration:.38s;animation-delay:.14s"></span>
-          <span class="eq-bar" style="animation-duration:.70s;animation-delay:.05s"></span>
-          <span class="eq-bar" style="animation-duration:.42s;animation-delay:.20s"></span>
-          <span class="eq-bar" style="animation-duration:.55s;animation-delay:.10s"></span>
-          <span class="eq-bar" style="animation-duration:.66s;animation-delay:.03s"></span>
-          <span class="eq-bar" style="animation-duration:.50s;animation-delay:.17s"></span>
-          <span class="eq-bar" style="animation-duration:.40s;animation-delay:.25s"></span>
-          <span class="eq-bar" style="animation-duration:.58s;animation-delay:.07s"></span>
-          <span class="eq-bar" style="animation-duration:.44s;animation-delay:.12s"></span>
-          <span class="eq-bar" style="animation-duration:.60s;animation-delay:.18s"></span>
+      <!-- Player card -->
+      <div class="mc-wrap" id="mcWrap">
+        <div class="mc-player">
+          <!-- Album art -->
+          <div class="mc-art">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/></svg>
+          </div>
+          <!-- Info + controls -->
+          <div class="mc-info">
+            <p class="mc-title" id="mcTitle">What If</p>
+            <p class="mc-tag"  id="mcTag">feat. HarryChild</p>
+            <!-- seek -->
+            <div class="mc-seek-row">
+              <span class="mc-time" id="mcCur">0:00</span>
+              <input type="range" class="mc-seek" id="mcSeek" value="0" min="0" step="0.01" />
+              <span class="mc-time right" id="mcDur">0:00</span>
+            </div>
+            <!-- controls -->
+            <div class="mc-controls">
+              <button class="mc-btn" id="mcShuffle" title="Shuffle">
+                <svg viewBox="0 0 24 24"><path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"/></svg>
+              </button>
+              <button class="mc-btn" id="mcPrev" title="Previous">
+                <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg>
+              </button>
+              <button class="mc-play-btn" id="mcPlay" aria-label="Play">
+                <svg id="mcPlayIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+              <button class="mc-btn" id="mcNext" title="Next">
+                <svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zm2-8.14L11.03 12 8 14.14V9.86zM16 6h2v12h-2z"/></svg>
+              </button>
+              <button class="mc-btn" id="mcRepeat" title="Repeat">
+                <svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg>
+              </button>
+              <div class="mc-vol">
+                <button class="mc-vol-btn" id="mcVolBtn">
+                  <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                </button>
+                <input type="range" class="mc-vol-slider" id="mcVol" min="0" max="1" step="0.05" value="1" />
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="player-body">
-          <p class="player-title">What If</p>
-          <p class="player-artist">Seungwoo Kang</p>
-          <input type="range" class="player-seek" id="seekBar" value="0" min="0" step="0.01" />
-          <div class="player-time-row">
-            <span id="timeCurrent">0:00</span>
-            <span id="timeDuration">0:00</span>
-          </div>
-          <div class="player-controls">
-            <button class="player-play-btn" id="playBtn" aria-label="Play">
-              <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            </button>
-          </div>
-          <div class="player-links">
-            <a href="https://www.youtube.com/watch?v=pB_24JFVyyI" target="_blank" rel="noopener" class="ext-link yt">
-              <svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
-              YouTube
-            </a>
-            <a href="https://soundcloud.com/vu6apgkenst2" target="_blank" rel="noopener" class="ext-link sc">
-              <svg viewBox="0 0 24 24"><path d="M1.175 12.225c-.108 0-.197.088-.207.197l-.018 1.02.018 1.005c.01.108.099.195.207.195.108 0 .198-.087.208-.195l.022-1.005-.022-1.02c-.01-.11-.1-.197-.208-.197zm-.957.606c-.1 0-.185.083-.192.183L0 13.442l.026.635c.007.1.092.183.192.183.1 0 .183-.083.19-.183L.43 13.442l-.022-.628c-.007-.1-.09-.183-.19-.183zm19.956-4.839c-.068 0-.131.006-.193.018C20.68 5.894 18.627 4 16.128 4c-.676 0-1.316.147-1.887.408-.218.096-.277.195-.28.288v8.827c.003.099.072.182.17.196l5.953.003c.96 0 1.738-.777 1.738-1.737 0-.96-.778-1.737-1.738-1.737zM3.51 10.395c-.144 0-.26.117-.27.26l-.027 2.788.027 1.352c.01.144.126.26.27.26.143 0 .26-.116.27-.26l.03-1.352-.03-2.788c-.01-.143-.127-.26-.27-.26zm17.285 3.445H6.17c-.149 0-.27.121-.27.27V17.4c0 .149.121.27.27.27h14.625c.892 0 1.615-.723 1.615-1.615 0-.892-.723-1.615-1.615-1.615zM4.898 9.59c-.182 0-.33.148-.34.33L4.53 13.44l.028 1.99c.01.182.158.33.34.33.181 0 .329-.148.339-.33l.032-1.99-.032-3.52c-.01-.182-.158-.33-.34-.33zm-1.388.806c-.162 0-.295.133-.303.295l-.025 3.75.025 1.767c.008.162.141.295.303.295.162 0 .294-.133.303-.295l.028-1.767-.028-3.75c-.009-.162-.141-.295-.303-.295z"/></svg>
-              SoundCloud
-            </a>
-            <a href="https://open.spotify.com/artist/6pETSz11KPQS3ArO4dmqRT" target="_blank" rel="noopener" class="ext-link sp">
-              <svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-              Spotify
-            </a>
+
+        <!-- Tracklist -->
+        <div class="mc-tracklist">
+          <p class="mc-tl-label">Tracklist</p>
+          <div id="mcTrackList">
+            <div class="mc-track-item active" data-idx="0">
+              <span class="mc-ti-num">01</span>
+              <div class="mc-ti-info">
+                <p class="mc-ti-name">What If</p>
+                <p class="mc-ti-sub">feat. HarryChild</p>
+              </div>
+              <span class="mc-ti-dur" id="dur0">—</span>
+            </div>
+            <div class="mc-track-item" data-idx="1">
+              <span class="mc-ti-num">02</span>
+              <div class="mc-ti-info">
+                <p class="mc-ti-name">Runway</p>
+                <p class="mc-ti-sub">Inst. · G minor</p>
+              </div>
+              <span class="mc-ti-dur" id="dur1">—</span>
+            </div>
+            <div class="mc-track-item" data-idx="2">
+              <span class="mc-ti-num">03</span>
+              <div class="mc-ti-info">
+                <p class="mc-ti-name">HI-LO</p>
+                <p class="mc-ti-sub">Demo</p>
+              </div>
+              <span class="mc-ti-dur" id="dur2">—</span>
+            </div>
           </div>
         </div>
       </div>
-      <audio id="audioEl" src="What%20if.mp3" preload="metadata"></audio>
 
-      <p class="music-subtitle">Performances &amp; Exhibitions</p>
-      <table class="music-table">
-        <thead>
-          <tr>
-            <th>Year</th>
-            <th>Event</th>
-            <th>Venue</th>
-            <th>Program</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>2025</td>
-            <td>[공연명]</td>
-            <td>[장소]</td>
-            <td>[레퍼토리]</td>
-          </tr>
-          <tr>
-            <td>2024</td>
-            <td>[공연명]</td>
-            <td>[장소]</td>
-            <td>[레퍼토리]</td>
-          </tr>
-        </tbody>
-      </table>
+      <!-- Platform links -->
+      <div class="mc-platform">
+        <span class="mc-platform-label">Also available on</span>
+        <a href="https://www.youtube.com/@nivv1234" target="_blank" rel="noopener" class="ext-link yt">
+          <svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>YouTube</a>
+        <a href="https://soundcloud.com/vu6apgkenst2" target="_blank" rel="noopener" class="ext-link sc">
+          <svg viewBox="0 0 24 24"><path d="M1.175 12.225c-.108 0-.197.088-.207.197l-.018 1.02.018 1.005c.01.108.099.195.207.195.108 0 .198-.087.208-.195l.022-1.005-.022-1.02c-.01-.11-.1-.197-.208-.197zm-.957.606c-.1 0-.185.083-.192.183L0 13.442l.026.635c.007.1.092.183.192.183.1 0 .183-.083.19-.183L.43 13.442l-.022-.628c-.007-.1-.09-.183-.19-.183zm19.956-4.839c-.068 0-.131.006-.193.018C20.68 5.894 18.627 4 16.128 4c-.676 0-1.316.147-1.887.408-.218.096-.277.195-.28.288v8.827c.003.099.072.182.17.196l5.953.003c.96 0 1.738-.777 1.738-1.737 0-.96-.778-1.737-1.738-1.737zM3.51 10.395c-.144 0-.26.117-.27.26l-.027 2.788.027 1.352c.01.144.126.26.27.26.143 0 .26-.116.27-.26l.03-1.352-.03-2.788c-.01-.143-.127-.26-.27-.26zm17.285 3.445H6.17c-.149 0-.27.121-.27.27V17.4c0 .149.121.27.27.27h14.625c.892 0 1.615-.723 1.615-1.615 0-.892-.723-1.615-1.615-1.615zM4.898 9.59c-.182 0-.33.148-.34.33L4.53 13.44l.028 1.99c.01.182.158.33.34.33.181 0 .329-.148.339-.33l.032-1.99-.032-3.52c-.01-.182-.158-.33-.34-.33zm-1.388.806c-.162 0-.295.133-.303.295l-.025 3.75.025 1.767c.008.162.141.295.303.295.162 0 .294-.133.303-.295l.028-1.767-.028-3.75c-.009-.162-.141-.295-.303-.295z"/></svg>SoundCloud</a>
+        <a href="https://open.spotify.com/artist/6pETSz11KPQS3ArO4dmqRT" target="_blank" rel="noopener" class="ext-link sp">
+          <svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>Spotify</a>
+      </div>
 
-      <p class="music-subtitle" style="margin-top: 8px;">Selected Works</p>
-      <ul class="works-list">
-        <li>
-          <strong>[곡/작품 제목]</strong> — [설명, 예: Solo piano piece exploring irregular meter and silence]
-          <div class="chip-row" style="margin-top:6px;">
-            <a href="#">Listen</a>
-            <a href="#">Score</a>
-          </div>
-        </li>
-        <li>
-          <strong>[곡/작품 제목 2]</strong> — [설명]
-          <div class="chip-row" style="margin-top:6px;">
-            <a href="#">Watch</a>
-          </div>
-        </li>
-      </ul>
+      <audio id="mcAudio" preload="auto"></audio>
     </section>
 
     <!-- ── CV ── -->
@@ -1298,55 +1480,186 @@
   </footer>
 
   <script>
-const playerCard = document.getElementById('audioPlayer');
-    const audio      = document.getElementById('audioEl');
-    const playBtn    = document.getElementById('playBtn');
-    const playIcon   = document.getElementById('playIcon');
-    const seekBar    = document.getElementById('seekBar');
-    const timeCur    = document.getElementById('timeCurrent');
-    const timeDur    = document.getElementById('timeDuration');
+  (function () {
+    const tracks = [
+      { title: 'What If',  tag: 'feat. HarryChild',  file: 'What if (feat. HarryChild).mp3' },
+      { title: 'Runway',   tag: 'Inst. · G minor',   file: 'Runway (Inst.) (G minor, 110).mp3' },
+      { title: 'HI-LO',   tag: 'Demo',               file: '[DEMO] HI-LO.wav' },
+    ];
 
-    const playPath  = 'M8 5v14l11-7z';
-    const pausePath = 'M6 19h4V5H6v14zm8-14v14h4V5h-4z';
+    const audio    = document.getElementById('mcAudio');
+    const wrap     = document.getElementById('mcWrap');
+    const titleEl  = document.getElementById('mcTitle');
+    const tagEl    = document.getElementById('mcTag');
+    const curEl    = document.getElementById('mcCur');
+    const durEl    = document.getElementById('mcDur');
+    const seek     = document.getElementById('mcSeek');
+    const playBtn  = document.getElementById('mcPlay');
+    const playIcon = document.getElementById('mcPlayIcon');
+    const shuffBtn = document.getElementById('mcShuffle');
+    const prevBtn  = document.getElementById('mcPrev');
+    const nextBtn  = document.getElementById('mcNext');
+    const repBtn   = document.getElementById('mcRepeat');
+    const volSlider= document.getElementById('mcVol');
+    const volBtn   = document.getElementById('mcVolBtn');
+    const trackItems = document.querySelectorAll('#mcTrackList .mc-track-item');
+
+    const PLAY_PATH  = 'M8 5v14l11-7z';
+    const PAUSE_PATH = 'M6 19h4V5H6v14zm8-14v14h4V5h-4z';
+    const VOL_PATH   = 'M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z';
+    const MUTE_PATH  = 'M16.5 12A4.5 4.5 0 0 0 14 7.97v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z';
+
+    let cur = 0, shuffled = false, repeat = false, muted = false;
+    let shuffleOrder = tracks.map((_, i) => i);
 
     function fmt(s) {
-      const m = Math.floor(s / 60);
-      const sec = Math.floor(s % 60).toString().padStart(2, '0');
-      return `${m}:${sec}`;
+      if (isNaN(s) || s < 0) return '0:00';
+      return `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+    }
+
+    function setSeekFill() {
+      const pct = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+      seek.style.background = `linear-gradient(to right, var(--accent) ${pct}%, var(--border) 0%)`;
+    }
+
+    function loadTrack(idx, autoplay) {
+      cur = idx;
+      const t = tracks[idx];
+      titleEl.textContent = t.title;
+      tagEl.textContent   = t.tag;
+      audio.src = encodeURIComponent(t.file).replace(/%20/g, '%20');
+      audio.load();
+      seek.value = 0;
+      curEl.textContent = '0:00';
+      durEl.textContent = '0:00';
+      seek.style.background = `linear-gradient(to right, var(--accent) 0%, var(--border) 0%)`;
+      trackItems.forEach((el, i) => el.classList.toggle('active', i === idx));
+      if (autoplay) audio.play().catch(() => {});
     }
 
     function setPlaying(state) {
-      playerCard.classList.toggle('playing', state);
-      playIcon.querySelector('path').setAttribute('d', state ? pausePath : playPath);
+      wrap.classList.toggle('playing', state);
+      playIcon.querySelector('path').setAttribute('d', state ? PAUSE_PATH : PLAY_PATH);
     }
 
+    // Pre-load durations for all tracks
+    tracks.forEach((t, i) => {
+      const tmp = new Audio(encodeURIComponent(t.file));
+      tmp.addEventListener('loadedmetadata', () => {
+        const el = document.getElementById('dur' + i);
+        if (el) el.textContent = fmt(tmp.duration);
+      });
+    });
+
+    // Initial load
+    loadTrack(0, false);
+
+    // Play/pause
     playBtn.addEventListener('click', () => {
       audio.paused ? audio.play().catch(() => {}) : audio.pause();
     });
 
     audio.addEventListener('play',  () => setPlaying(true));
     audio.addEventListener('pause', () => setPlaying(false));
-    audio.addEventListener('ended', () => {
-      setPlaying(false);
-      seekBar.value = 0;
-      timeCur.textContent = '0:00';
-      seekBar.style.background = '';
-    });
 
     audio.addEventListener('loadedmetadata', () => {
-      seekBar.max = audio.duration;
-      timeDur.textContent = fmt(audio.duration);
+      seek.max = audio.duration;
+      durEl.textContent = fmt(audio.duration);
     });
 
     audio.addEventListener('timeupdate', () => {
       if (!isNaN(audio.duration)) {
-        seekBar.value = audio.currentTime;
-        timeCur.textContent = fmt(audio.currentTime);
-        seekBar.style.background = `linear-gradient(to right, var(--accent) ${(audio.currentTime/audio.duration)*100}%, var(--border) 0%)`;
+        seek.value = audio.currentTime;
+        curEl.textContent = fmt(audio.currentTime);
+        setSeekFill();
       }
     });
 
-    seekBar.addEventListener('input', () => { audio.currentTime = seekBar.value; });
+    audio.addEventListener('ended', () => {
+      if (repeat) {
+        audio.currentTime = 0;
+        audio.play().catch(() => {});
+      } else {
+        const nextIdx = getNext();
+        if (nextIdx !== null) loadTrack(nextIdx, true);
+        else setPlaying(false);
+      }
+    });
+
+    seek.addEventListener('input', () => {
+      audio.currentTime = seek.value;
+      setSeekFill();
+    });
+
+    // Prev / Next
+    function getPrev() {
+      if (shuffled) {
+        const pos = shuffleOrder.indexOf(cur);
+        return shuffleOrder[(pos - 1 + tracks.length) % tracks.length];
+      }
+      return (cur - 1 + tracks.length) % tracks.length;
+    }
+
+    function getNext() {
+      if (shuffled) {
+        const pos = shuffleOrder.indexOf(cur);
+        const nextPos = pos + 1;
+        return nextPos < shuffleOrder.length ? shuffleOrder[nextPos] : null;
+      }
+      const next = cur + 1;
+      return next < tracks.length ? next : null;
+    }
+
+    prevBtn.addEventListener('click', () => loadTrack(getPrev(), !audio.paused));
+    nextBtn.addEventListener('click', () => {
+      const n = getNext();
+      if (n !== null) loadTrack(n, !audio.paused);
+    });
+
+    // Tracklist click
+    trackItems.forEach(el => {
+      el.addEventListener('click', () => {
+        const idx = parseInt(el.dataset.idx, 10);
+        if (idx === cur) {
+          audio.paused ? audio.play().catch(() => {}) : audio.pause();
+        } else {
+          loadTrack(idx, true);
+        }
+      });
+    });
+
+    // Shuffle
+    shuffBtn.addEventListener('click', () => {
+      shuffled = !shuffled;
+      shuffBtn.classList.toggle('active', shuffled);
+      if (shuffled) {
+        shuffleOrder = tracks.map((_, i) => i).sort(() => Math.random() - 0.5);
+      }
+    });
+
+    // Repeat
+    repBtn.addEventListener('click', () => {
+      repeat = !repeat;
+      repBtn.classList.toggle('active', repeat);
+    });
+
+    // Volume
+    volSlider.addEventListener('input', () => {
+      audio.volume = volSlider.value;
+      muted = (volSlider.value == 0);
+      volBtn.querySelector('path').setAttribute('d', muted ? MUTE_PATH : VOL_PATH);
+      volSlider.style.background = `linear-gradient(to right, var(--accent) ${volSlider.value * 100}%, var(--border) 0%)`;
+    });
+
+    volBtn.addEventListener('click', () => {
+      muted = !muted;
+      audio.muted = muted;
+      volBtn.querySelector('path').setAttribute('d', muted ? MUTE_PATH : VOL_PATH);
+    });
+
+    // Init volume fill
+    volSlider.style.background = `linear-gradient(to right, var(--accent) 100%, var(--border) 0%)`;
+  })();
   </script>
 </body>
 </html>
