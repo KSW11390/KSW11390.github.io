@@ -1036,15 +1036,41 @@
       background: none;
       border: none;
       cursor: pointer;
-      padding: 4px;
+      padding: 0;
+      width: 36px; height: 36px;
+      border-radius: 50%;
       color: var(--text-muted);
       display: flex;
       align-items: center;
-      transition: color 0.15s;
+      justify-content: center;
+      flex-direction: column;
+      gap: 3px;
+      position: relative;
+      transition: color 0.15s, background 0.15s, transform 0.1s;
     }
 
-    .mc-btn:hover { color: var(--text-primary); }
-    .mc-btn.active { color: var(--accent); }
+    .mc-btn:hover {
+      color: var(--text-primary);
+      background: rgba(92, 26, 0, 0.07);
+      transform: scale(1.08);
+    }
+
+    .mc-btn.active {
+      color: var(--accent);
+    }
+
+    /* 활성 상태 하단 점 인디케이터 */
+    .mc-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: 3px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
     .mc-btn svg { width: 18px; height: 18px; fill: currentColor; }
 
     .mc-play-btn {
@@ -1068,7 +1094,18 @@
       margin-left: auto;
     }
 
-    .mc-vol-btn { color: var(--text-muted); background: none; border: none; cursor: pointer; display:flex; align-items:center; }
+    .mc-vol-btn {
+      color: var(--text-muted);
+      background: none; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
+      transition: color 0.15s, background 0.15s, transform 0.1s;
+    }
+    .mc-vol-btn:hover {
+      color: var(--text-primary);
+      background: rgba(92, 26, 0, 0.07);
+      transform: scale(1.08);
+    }
     .mc-vol-btn svg { width: 16px; height: 16px; fill: currentColor; }
 
     .mc-vol-slider {
