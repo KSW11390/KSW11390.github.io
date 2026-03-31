@@ -1187,10 +1187,48 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 600px) {
+      /* ── Nav ── */
+      nav .nav-inner {
+        padding: 0 16px;
+        gap: 8px;
+      }
+
+      nav .nav-name {
+        font-size: 12px;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      nav ul {
+        gap: 10px;
+        overflow-x: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+
+      nav ul::-webkit-scrollbar { display: none; }
+
+      nav ul a {
+        font-size: 10.5px;
+        white-space: nowrap;
+      }
+
+      /* ── Layout ── */
+      main {
+        padding: 0 16px 60px;
+      }
+
+      /* ── Hero ── */
       #hero {
         flex-direction: column;
         align-items: center;
         text-align: center;
+        gap: 28px;
+        padding-top: 48px;
+      }
+
+      #hero .hero-right {
+        order: -1;
       }
 
       #hero .hero-photo {
@@ -1209,25 +1247,60 @@
         padding-top: 12px;
       }
 
-      nav ul {
-        gap: 16px;
-      }
-
-      nav ul a {
-        font-size: 11px;
-      }
-
       #hero h1 {
         font-size: 26px;
       }
 
+      /* ── Music player ── */
+      .mc-player {
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        padding: 20px 16px 16px;
+      }
+
+      .mc-art {
+        width: 120px;
+        height: 120px;
+      }
+
+      .mc-art svg { width: 38px; height: 38px; }
+
+      .mc-info {
+        width: 100%;
+      }
+
+      .mc-title { font-size: 16px; text-align: center; }
+      .mc-tag   { text-align: center; margin-bottom: 14px; }
+
+      .mc-controls {
+        gap: 8px;
+        justify-content: center;
+      }
+
+      .mc-btn { width: 32px; height: 32px; }
+      .mc-btn svg { width: 16px; height: 16px; }
+
+      .mc-play-btn { width: 42px; height: 42px; }
+      .mc-play-btn svg { width: 18px; height: 18px; }
+
+      .mc-vol-slider { width: 56px; }
+
+      .mc-tracklist { padding: 14px 16px 16px; }
+
+      .mc-platform {
+        gap: 8px;
+        justify-content: center;
+      }
+
+      /* ── General ── */
       .interest-grid {
         grid-template-columns: 1fr;
         gap: 20px;
       }
 
       .cv-table td:first-child {
-        width: 120px;
+        width: 100px;
         font-size: 10px;
       }
     }
