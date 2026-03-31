@@ -1481,37 +1481,47 @@
 
   <script>
   (function () {
+    /* ── 데이터 ── */
     const tracks = [
       { title: 'What if (feat. HarryChild)', tag: 'NIVV', file: 'What if (feat. HarryChild).mp3' },
       { title: 'Show (Inst.)',               tag: 'NIVV', file: 'Show (Inst.).mp3' },
       { title: 'Runway (Inst.)',             tag: 'NIVV', file: 'Runway (Inst.).mp3' },
     ];
 
-    const audio    = document.getElementById('mcAudio');
-    const wrap     = document.getElementById('mcWrap');
-    const titleEl  = document.getElementById('mcTitle');
-    const tagEl    = document.getElementById('mcTag');
-    const curEl    = document.getElementById('mcCur');
-    const durEl    = document.getElementById('mcDur');
-    const seek     = document.getElementById('mcSeek');
-    const playBtn  = document.getElementById('mcPlay');
-    const playIcon = document.getElementById('mcPlayIcon');
-    const shuffBtn = document.getElementById('mcShuffle');
-    const prevBtn  = document.getElementById('mcPrev');
-    const nextBtn  = document.getElementById('mcNext');
-    const repBtn   = document.getElementById('mcRepeat');
-    const volSlider= document.getElementById('mcVol');
-    const volBtn   = document.getElementById('mcVolBtn');
+    /* ── SVG 경로 상수 (const를 사용보다 먼저 위에 정의) ── */
+    const PLAY_PATH    = 'M8 5v14l11-7z';
+    const PAUSE_PATH   = 'M6 19h4V5H6v14zm8-14v14h4V5h-4z';
+    const VOL_PATH     = 'M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z';
+    const MUTE_PATH    = 'M16.5 12A4.5 4.5 0 0 0 14 7.97v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z';
+    const REP_ALL_PATH = 'M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z';
+    const REP_ONE_PATH = 'M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4zm-4-2V9h-1l-2 1v1h1.5v4H13z';
+
+    /* ── DOM 참조 ── */
+    const audio      = document.getElementById('mcAudio');
+    const wrap       = document.getElementById('mcWrap');
+    const titleEl    = document.getElementById('mcTitle');
+    const tagEl      = document.getElementById('mcTag');
+    const curEl      = document.getElementById('mcCur');
+    const durEl      = document.getElementById('mcDur');
+    const seek       = document.getElementById('mcSeek');
+    const playBtn    = document.getElementById('mcPlay');
+    const playIcon   = document.getElementById('mcPlayIcon');
+    const shuffBtn   = document.getElementById('mcShuffle');
+    const prevBtn    = document.getElementById('mcPrev');
+    const nextBtn    = document.getElementById('mcNext');
+    const repBtn     = document.getElementById('mcRepeat');
+    const volSlider  = document.getElementById('mcVol');
+    const volBtn     = document.getElementById('mcVolBtn');
     const trackItems = document.querySelectorAll('#mcTrackList .mc-track-item');
 
-    const PLAY_PATH  = 'M8 5v14l11-7z';
-    const PAUSE_PATH = 'M6 19h4V5H6v14zm8-14v14h4V5h-4z';
-    const VOL_PATH   = 'M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z';
-    const MUTE_PATH  = 'M16.5 12A4.5 4.5 0 0 0 14 7.97v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z';
-
-    let cur = 0, shuffled = false, repeat = false, muted = false;
+    /* ── 상태 ── */
+    let cur = 0;
+    let shuffled   = false;
+    let repeatMode = 0;   // 0=반복X, 1=전체반복, 2=한곡반복
+    let muted      = false;
     let shuffleOrder = tracks.map((_, i) => i);
 
+    /* ── 유틸 ── */
     function fmt(s) {
       if (isNaN(s) || s < 0) return '0:00';
       return `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
@@ -1522,27 +1532,77 @@
       seek.style.background = `linear-gradient(to right, var(--accent) ${pct}%, var(--border) 0%)`;
     }
 
+    /* ── 트랙 로드 ── */
     function loadTrack(idx, autoplay) {
       cur = idx;
       const t = tracks[idx];
       titleEl.textContent = t.title;
       tagEl.textContent   = t.tag;
-      audio.src = encodeURIComponent(t.file).replace(/%20/g, '%20');
+      audio.src = encodeURIComponent(t.file);
       audio.load();
       seek.value = 0;
       curEl.textContent = '0:00';
       durEl.textContent = '0:00';
-      seek.style.background = `linear-gradient(to right, var(--accent) 0%, var(--border) 0%)`;
+      setSeekFill();
       trackItems.forEach((el, i) => el.classList.toggle('active', i === idx));
       if (autoplay) audio.play().catch(() => {});
     }
 
+    /* ── 재생 UI ── */
     function setPlaying(state) {
       wrap.classList.toggle('playing', state);
       playIcon.querySelector('path').setAttribute('d', state ? PAUSE_PATH : PLAY_PATH);
     }
 
-    // Pre-load durations for all tracks
+    /* ── Repeat UI (0→전체 아이콘 dim, 1→전체 아이콘 accent, 2→한곡 아이콘 accent) ── */
+    function setRepeatUI() {
+      const path = repBtn.querySelector('path');
+      if (repeatMode === 0) {
+        repBtn.classList.remove('active');
+        path.setAttribute('d', REP_ALL_PATH);
+      } else if (repeatMode === 1) {
+        repBtn.classList.add('active');
+        path.setAttribute('d', REP_ALL_PATH);
+      } else {
+        repBtn.classList.add('active');
+        path.setAttribute('d', REP_ONE_PATH);
+      }
+    }
+
+    /* ── Shuffle 순서 생성 ── */
+    function newShuffle() {
+      const rest = tracks.map((_, i) => i).filter(i => i !== cur);
+      for (let i = rest.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [rest[i], rest[j]] = [rest[j], rest[i]];
+      }
+      shuffleOrder = [cur, ...rest];
+    }
+
+    /* ── 이전 / 다음 인덱스 ── */
+    function getPrev() {
+      if (shuffled) {
+        const pos = shuffleOrder.indexOf(cur);
+        return shuffleOrder[(pos - 1 + shuffleOrder.length) % shuffleOrder.length];
+      }
+      return (cur - 1 + tracks.length) % tracks.length;
+    }
+
+    function getNext(allowWrap) {
+      if (shuffled) {
+        const pos = shuffleOrder.indexOf(cur);
+        const np  = pos + 1;
+        if (np < shuffleOrder.length) return shuffleOrder[np];
+        if (allowWrap && repeatMode === 1) { newShuffle(); return shuffleOrder[0]; }
+        return null;
+      }
+      const next = cur + 1;
+      if (next < tracks.length) return next;
+      if (allowWrap && repeatMode === 1) return 0;
+      return null;
+    }
+
+    /* ── 초기화 ── */
     tracks.forEach((t, i) => {
       const tmp = new Audio(encodeURIComponent(t.file));
       tmp.addEventListener('loadedmetadata', () => {
@@ -1551,22 +1611,21 @@
       });
     });
 
-    // Initial load
     loadTrack(0, false);
+    setRepeatUI();
+    volSlider.style.background = `linear-gradient(to right, var(--accent) 100%, var(--border) 0%)`;
 
-    // Play/pause
+    /* ── 이벤트 리스너 ── */
     playBtn.addEventListener('click', () => {
       audio.paused ? audio.play().catch(() => {}) : audio.pause();
     });
 
     audio.addEventListener('play',  () => setPlaying(true));
     audio.addEventListener('pause', () => setPlaying(false));
-
     audio.addEventListener('loadedmetadata', () => {
       seek.max = audio.duration;
       durEl.textContent = fmt(audio.duration);
     });
-
     audio.addEventListener('timeupdate', () => {
       if (!isNaN(audio.duration)) {
         seek.value = audio.currentTime;
@@ -1574,14 +1633,13 @@
         setSeekFill();
       }
     });
-
     audio.addEventListener('ended', () => {
-      if (repeat) {
+      if (repeatMode === 2) {
         audio.currentTime = 0;
         audio.play().catch(() => {});
       } else {
-        const nextIdx = getNext();
-        if (nextIdx !== null) loadTrack(nextIdx, true);
+        const n = getNext(true);
+        if (n !== null) loadTrack(n, true);
         else setPlaying(false);
       }
     });
@@ -1591,32 +1649,12 @@
       setSeekFill();
     });
 
-    // Prev / Next
-    function getPrev() {
-      if (shuffled) {
-        const pos = shuffleOrder.indexOf(cur);
-        return shuffleOrder[(pos - 1 + tracks.length) % tracks.length];
-      }
-      return (cur - 1 + tracks.length) % tracks.length;
-    }
-
-    function getNext() {
-      if (shuffled) {
-        const pos = shuffleOrder.indexOf(cur);
-        const nextPos = pos + 1;
-        return nextPos < shuffleOrder.length ? shuffleOrder[nextPos] : null;
-      }
-      const next = cur + 1;
-      return next < tracks.length ? next : null;
-    }
-
     prevBtn.addEventListener('click', () => loadTrack(getPrev(), !audio.paused));
     nextBtn.addEventListener('click', () => {
-      const n = getNext();
-      if (n !== null) loadTrack(n, !audio.paused);
+      const n = getNext(false);
+      loadTrack(n !== null ? n : 0, !audio.paused);
     });
 
-    // Tracklist click
     trackItems.forEach(el => {
       el.addEventListener('click', () => {
         const idx = parseInt(el.dataset.idx, 10);
@@ -1628,25 +1666,21 @@
       });
     });
 
-    // Shuffle
     shuffBtn.addEventListener('click', () => {
       shuffled = !shuffled;
       shuffBtn.classList.toggle('active', shuffled);
-      if (shuffled) {
-        shuffleOrder = tracks.map((_, i) => i).sort(() => Math.random() - 0.5);
-      }
+      if (shuffled) newShuffle();
     });
 
-    // Repeat
     repBtn.addEventListener('click', () => {
-      repeat = !repeat;
-      repBtn.classList.toggle('active', repeat);
+      repeatMode = (repeatMode + 1) % 3;
+      setRepeatUI();
     });
 
-    // Volume
     volSlider.addEventListener('input', () => {
-      audio.volume = volSlider.value;
-      muted = (volSlider.value == 0);
+      audio.volume = parseFloat(volSlider.value);
+      muted = (parseFloat(volSlider.value) === 0);
+      audio.muted = muted;
       volBtn.querySelector('path').setAttribute('d', muted ? MUTE_PATH : VOL_PATH);
       volSlider.style.background = `linear-gradient(to right, var(--accent) ${volSlider.value * 100}%, var(--border) 0%)`;
     });
@@ -1657,8 +1691,6 @@
       volBtn.querySelector('path').setAttribute('d', muted ? MUTE_PATH : VOL_PATH);
     });
 
-    // Init volume fill
-    volSlider.style.background = `linear-gradient(to right, var(--accent) 100%, var(--border) 0%)`;
   })();
   </script>
 </body>
