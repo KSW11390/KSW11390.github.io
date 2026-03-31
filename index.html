@@ -1038,32 +1038,39 @@
       cursor: pointer;
       padding: 0;
       width: 36px; height: 36px;
-      border-radius: 50%;
-      color: var(--text-muted);
+      color: #a07060;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
       gap: 3px;
       position: relative;
-      transition: color 0.15s, background 0.15s, transform 0.1s;
+      transition: color 0.12s, transform 0.12s;
     }
 
     .mc-btn:hover {
       color: var(--text-primary);
-      background: rgba(92, 26, 0, 0.07);
-      transform: scale(1.08);
+      transform: scale(1.15);
+    }
+
+    .mc-btn:active {
+      transform: scale(0.94);
     }
 
     .mc-btn.active {
       color: var(--accent);
     }
 
+    .mc-btn.active:hover {
+      color: #8b2500;
+      transform: scale(1.15);
+    }
+
     /* 활성 상태 하단 점 인디케이터 */
     .mc-btn.active::after {
       content: '';
       position: absolute;
-      bottom: 3px;
+      bottom: 2px;
       left: 50%;
       transform: translateX(-50%);
       width: 4px; height: 4px;
@@ -1095,17 +1102,17 @@
     }
 
     .mc-vol-btn {
-      color: var(--text-muted);
+      color: #a07060;
       background: none; border: none; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
-      width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
-      transition: color 0.15s, background 0.15s, transform 0.1s;
+      width: 30px; height: 30px; flex-shrink: 0;
+      transition: color 0.12s, transform 0.12s;
     }
     .mc-vol-btn:hover {
       color: var(--text-primary);
-      background: rgba(92, 26, 0, 0.07);
-      transform: scale(1.08);
+      transform: scale(1.15);
     }
+    .mc-vol-btn:active { transform: scale(0.94); }
     .mc-vol-btn svg { width: 16px; height: 16px; fill: currentColor; }
 
     .mc-vol-slider {
