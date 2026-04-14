@@ -1200,16 +1200,18 @@
       }
 
       nav ul {
-        gap: 10px;
+        gap: 6px;
         overflow-x: auto;
         scrollbar-width: none;
         -ms-overflow-style: none;
+        -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+        mask-image: linear-gradient(to right, black 85%, transparent 100%);
       }
 
       nav ul::-webkit-scrollbar { display: none; }
 
       nav ul a {
-        font-size: 10.5px;
+        font-size: 10px;
         white-space: nowrap;
       }
 
@@ -1291,6 +1293,11 @@
       .mc-platform {
         gap: 8px;
         justify-content: center;
+      }
+
+      .mc-platform-label {
+        width: 100%;
+        text-align: center;
       }
 
       /* ── General ── */
