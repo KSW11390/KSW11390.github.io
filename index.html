@@ -285,117 +285,6 @@
       line-height: 1.65;
     }
 
-    /* ── PUBLICATIONS ── */
-    .pub-list {
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
-    }
-
-    .pub-item {
-      padding-bottom: 32px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .pub-item:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-    }
-
-    .pub-item h3 {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 4px;
-      line-height: 1.45;
-    }
-
-    .pub-item .authors {
-      font-size: 13.5px;
-      color: var(--text-muted);
-      margin-bottom: 3px;
-    }
-
-    .pub-item .authors strong {
-      color: var(--text-secondary);
-      font-weight: 700;
-    }
-
-    .pub-item .venue {
-      font-size: 13px;
-      font-style: italic;
-      color: var(--text-muted);
-      margin-bottom: 8px;
-    }
-
-    .pub-item .abstract {
-      font-size: 13.5px;
-      color: var(--text-secondary);
-      line-height: 1.65;
-      margin-bottom: 10px;
-    }
-
-    .pub-note {
-      font-size: 12.5px;
-      color: var(--text-muted);
-      font-style: italic;
-      margin-bottom: 24px;
-    }
-
-    /* ── PROJECTS ── */
-    .project-list {
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
-    }
-
-    .project-item {
-      padding-bottom: 32px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .project-item:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-    }
-
-    .project-item h3 {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 3px;
-    }
-
-    .project-item .meta-line {
-      font-size: 13px;
-      color: var(--text-muted);
-      font-style: italic;
-      margin-bottom: 8px;
-    }
-
-    .project-item p {
-      font-size: 13.5px;
-      color: var(--text-secondary);
-      line-height: 1.65;
-      margin-bottom: 8px;
-    }
-
-    .stack {
-      font-size: 12.5px;
-      color: var(--text-muted);
-      margin-bottom: 10px;
-    }
-
-    .stack span {
-      background: #f5ebe3;
-      border: 1px solid var(--border);
-      padding: 2px 8px;
-      border-radius: 2px;
-      margin-right: 5px;
-      display: inline-block;
-      margin-bottom: 4px;
-    }
-
     /* ── MUSIC ── */
     .music-table {
       width: 100%;
@@ -1320,8 +1209,6 @@
     <div class="nav-inner">
       <a class="nav-name" href="./">Seungwoo Kang</a>
       <ul>
-        <li><a href="#publications">Publications</a></li>
-        <li><a href="#projects">Projects</a></li>
         <li><a href="#music">Music</a></li>
         <li><a href="#cv">CV</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -1379,67 +1266,6 @@
             </svg>
           </a>
         </div>
-      </div>
-    </section>
-
-    <!-- ── PUBLICATIONS ── -->
-    <section id="publications">
-      <p class="section-title">Publications</p>
-      <p class="pub-note">† Preprints and works in submission.</p>
-      <div class="pub-list">
-
-        <div class="pub-item">
-          <h3>[논문 제목] †</h3>
-          <p class="authors"><strong>[본인 이름]</strong>, [공저자 1], [공저자 2]</p>
-          <p class="venue">[학회/저널명] &middot; [연도]</p>
-          <p class="abstract">
-            [한 줄 요약 — 예: We propose a lightweight fine-tuning method for speech LLMs
-            that reduces hallucination in spoken question-answering tasks.]
-          </p>
-          <div class="chip-row">
-            <a href="#">PDF</a>
-            <a href="#">arXiv</a>
-            <a href="#">Slides</a>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ── PROJECTS ── -->
-    <section id="projects">
-      <p class="section-title">Projects</p>
-      <div class="project-list">
-
-        <div class="project-item">
-          <h3>[프로젝트 제목]</h3>
-          <p class="meta-line">[수업명 or Personal Project] &middot; [기간]</p>
-          <p>
-            [설명 — 예: Built an end-to-end Korean speech recognition system fine-tuned on
-            spontaneous speech corpora. Achieved X% WER on the test set, outperforming the baseline by Y%.]
-          </p>
-          <div class="stack">
-            <span>Python</span><span>PyTorch</span><span>HuggingFace</span><span>Whisper</span>
-          </div>
-          <div class="chip-row">
-            <a href="#">GitHub</a>
-            <a href="#">Report</a>
-            <a href="#">Demo</a>
-          </div>
-        </div>
-
-        <div class="project-item">
-          <h3>[프로젝트 제목 2]</h3>
-          <p class="meta-line">[수업명 or Personal Project] &middot; [기간]</p>
-          <p>[설명]</p>
-          <div class="stack">
-            <span>[기술 스택]</span>
-          </div>
-          <div class="chip-row">
-            <a href="#">GitHub</a>
-          </div>
-        </div>
-
       </div>
     </section>
 
