@@ -4,6 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>[Seungwoo Kang] — Portfolio</title>
+  <script>
+    // Start at the top on refresh instead of restoring the previous scroll position.
+    // A #section deep link is still honored.
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    window.addEventListener('load', function () {
+      var hash = window.location.hash;
+      if (hash && hash.length > 1) {
+        try {
+          var el = document.querySelector(hash);
+          if (el) { el.scrollIntoView(); return; }
+        } catch (e) {}
+      }
+      window.scrollTo(0, 0);
+    });
+  </script>
   <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after {
