@@ -285,6 +285,49 @@
       line-height: 1.65;
     }
 
+    /* ── PROJECTS ── */
+    .project-list {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .project-item {
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .project-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .project-item h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 3px;
+    }
+
+    .project-item .meta-line {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-bottom: 8px;
+    }
+
+    .project-item ul {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      padding-left: 1.2em;
+      margin-bottom: 10px;
+    }
+
+    .project-item ul li {
+      margin-bottom: 2px;
+    }
+
     /* ── MUSIC ── */
     .music-table {
       width: 100%;
@@ -1209,6 +1252,7 @@
     <div class="nav-inner">
       <a class="nav-name" href="./">Seungwoo Kang</a>
       <ul>
+        <li><a href="#projects">Projects</a></li>
         <li><a href="#music">Music</a></li>
         <li><a href="#cv">CV</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -1260,6 +1304,40 @@
             </svg>
           </a>
         </div>
+      </div>
+    </section>
+
+    <!-- ── PROJECTS ── -->
+    <section id="projects">
+      <p class="section-title">Projects</p>
+      <div class="project-list">
+
+        <div class="project-item">
+          <h3>Jailbreak-Robust ZeroTuning for LLMs</h3>
+          <p class="meta-line">Team Leader &middot; May 2026</p>
+          <ul>
+            <li>Advanced Machine Learning Course Project</li>
+            <li>Reproduced and evaluated ZeroTuning-based attention sink modulation</li>
+            <li>Investigated the relationship between attention modulation and jailbreak robustness</li>
+          </ul>
+          <div class="chip-row">
+            <a href="https://github.com/KSW11390/Jailbreak_Robust_ZeroTuning" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://www.youtube.com/watch?v=xQ9ryfHG8XM" target="_blank" rel="noopener">YouTube</a>
+          </div>
+        </div>
+
+        <div class="project-item">
+          <h3>Face-Age Estimation</h3>
+          <p class="meta-line">Team Leader &middot; Oct &ndash; Dec 2025</p>
+          <ul>
+            <li>Built a face age estimation model using ResNet/VGG backbones on the UTKFace dataset</li>
+            <li>Enhanced model generalization performance through data augmentation strategies</li>
+          </ul>
+          <div class="chip-row">
+            <a href="https://github.com/KSW11390/face-age" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </div>
+
       </div>
     </section>
 
